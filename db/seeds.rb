@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+Especialidade.create(nome: "Cardiologia")
+Especialidade.create(nome: "Ortopedia")
+Especialidade.create(nome: "Terapeuta")
+Especialidade.create(nome: "Dermatologia")
+
+puts "Especialidades populadas com sucesso!"
