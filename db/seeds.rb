@@ -48,5 +48,3 @@ end
 # Consultas
 
 @appointment = Appointment.create(medic_id: @medic.id, patient_id: @patient.id, date: @schedule.date, finished: false)
-
-
