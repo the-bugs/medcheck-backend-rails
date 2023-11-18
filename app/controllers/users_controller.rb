@@ -6,12 +6,12 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json: @users
+    render json: @users, include: [:patient, :medic]
   end
 
   # GET /users/1
   def show
-    render json: @user
+    render json: @user, include: [:patient => {:include => :record}]
   end
 
   # POST /users
@@ -51,8 +51,8 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-    params.permit(
+      params.permit(
        :name, :email, :password, :password_confirmation
-    )
-  end
+      )
+    end
 end
