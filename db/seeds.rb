@@ -20,12 +20,13 @@ end
 	{
 		name: "Rodrigo",
 		email: "rodrigocsm@ufba.br",
-		password_digest: "a2s13d3a5s4d"
+		password: "a2s13d3a5s4d",
+		user_type: 0
 	},
 	{
 		name: "Usuário 2",
 		email: "usuario2@ufba.br",
-		password_digest: "a3s2d1a32sd16"
+		password: "a3s2d1a32sd16"
 	}
 ])
 
