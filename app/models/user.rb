@@ -21,6 +21,6 @@ class User < ApplicationRecord
 	private
 
 	def default_values
-		self.is_admin = false
+		self.is_admin |= false
 	end
 end
