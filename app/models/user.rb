@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
+  after_initialize :default_values
+  
 	validates :email, presence: true, uniqueness: true
 	validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 	# validates :password,
@@ -12,9 +14,13 @@ class User < ApplicationRecord
 	has_one :specialty, through: :medic
 
 	enum user_type: {
-		Administrador: 0,
 		Medico: 1,
 		Paciente: 2,
 	}
 
+	private
+
+	def default_values
+		self.is_admin = false
+	end
 end
