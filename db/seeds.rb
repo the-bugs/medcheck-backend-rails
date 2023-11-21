@@ -21,7 +21,7 @@ end
 		name: "Rodrigo",
 		email: "rodrigocsm@ufba.br",
 		password: "a2s13d3a5s4d",
-		user_type: 0
+		is_admin: true
 	},
 	{
 		name: "Usuário 2",
