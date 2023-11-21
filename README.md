@@ -3,11 +3,11 @@
 
 
 ## Sobre o projeto
-Este é um projeto de avaliação para a matéria MATA76-Linguagens para aplicação comercial do curso Sistemas de Informação (UFBA), para o desenvolvimento da aplicação MedCheck foi escolhida a linguagem Ruby com o framework Ruby On Rails para o back-end, esse projeto consiste em uma plataforma para a marcação de consultas médicas por parte dos pacientes e de gerenciamento dos atendimentos por parte dos médicos. O sistema foi pensado de uma forma que os usuários poderiam ter o acesso às consultas marcadas e aos prontuários, enquanto que para os médicos teria a possibilidade dele visualizar todas as consultas que foram agendadas com ele, além disso ele poderá preencher os prontuários diretamente pela plataforma.
+Este é um projeto de avaliação para a matéria MATA76-Linguagens para aplicação comercial do curso Sistemas de Informação (UFBA), para o desenvolvimento da aplicação MedCheck foi escolhida a linguagem Ruby com o framework Ruby On Rails para o back-end e para o front-end foi escolhida a biblioteca ReactJs, além disso foi utilizada a biblioteca Axios para fazer a conexão entre o back-end e o front-end. Esse projeto consiste em uma plataforma para a marcação de consultas médicas por parte dos pacientes e de gerenciamento dos atendimentos por parte dos médicos. O sistema foi pensado de uma forma que os usuários poderiam ter o acesso às consultas marcadas e aos prontuários, enquanto que para os médicos teria a possibilidade dele visualizar todas as consultas que foram agendadas com ele, além disso ele poderá preencher os prontuários diretamente pela plataforma.
 
 
 ## Diagrama UML
-![teste](https://github.com/the-bugs/medcheck-backend-rails/blob/Eliel-Batista-patch-1/doc/diagrama/diagrama.png)
+![Diagrama](https://github.com/the-bugs/medcheck-backend-rails/blob/main/doc/diagrama/diagrama.png)
 
 ## Como executar o projeto
 
