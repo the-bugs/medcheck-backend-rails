@@ -7,7 +7,7 @@ Este é um projeto de avaliação para a matéria MATA76-Linguagens para aplica�
 
 
 ## Diagrama UML
-![teste](https://github.com/the-bugs/medcheck-backend-rails/blob/Eliel-Batista-patch-1/doc/diagrama/diagrama.png)
+![Diagrama](https://github.com/the-bugs/medcheck-backend-rails/blob/main/doc/diagrama/diagrama.png)
 
 ## Como executar o projeto
 
