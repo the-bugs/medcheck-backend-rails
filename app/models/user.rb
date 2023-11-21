@@ -18,6 +18,10 @@ class User < ApplicationRecord
 		Paciente: 2,
 	}
 
+	def admin?
+		self.is_admin
+	end
+
 	private
 
 	def default_values
