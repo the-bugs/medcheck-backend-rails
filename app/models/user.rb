@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   after_initialize :default_values
-  
+
 	validates :email, presence: true, uniqueness: true
 	validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 	# validates :password,
