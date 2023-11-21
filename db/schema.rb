@@ -23,12 +23,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_21_191226) do
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
   end
 
-  create_table "especialidades", force: :cascade do |t|
-    t.string "nome"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "medics", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "specialty_id", null: false
