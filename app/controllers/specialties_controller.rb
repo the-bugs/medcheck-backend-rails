@@ -1,5 +1,7 @@
 class SpecialtiesController < ApplicationController
+  before_action :authorize_request, only: %i[create, update, destroy]
   before_action :set_specialty, only: %i[ show update destroy ]
+  before_action :permit_request, only: %i[ create ]
 
   # GET /specialties
   def index
@@ -46,6 +48,6 @@ class SpecialtiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def specialty_params
-      params.require(:specialty).permit(:name)
+      params.permit(:name)
     end
 end
