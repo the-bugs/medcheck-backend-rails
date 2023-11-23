@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :users, path: :usuarios
 
   get '/medicos/especialidades/:id', to: 'medics#medics_by_specialty'
+  get '/agendas/medicos/:id', to: 'schedules#schedules_by_medics'
   post '/auth/login', to: 'authentication#login'
   get '/*a', to: 'application#not_found'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
