@@ -38,16 +38,30 @@ class MedicsController < ApplicationController
   def destroy
     @medic.destroy
   end
+  
+  # GET /medics/specialties/:id
+  def medics_by_specialty
+    @medics = Medic.where(specialty_id: params[:id]).map { 
+      |medic| {
+        id: medic.id, 
+        numeroRegistro: medic.registry,
+        "usuario.nome": medic.user.name,
+        "especialidade.id": medic.specialty_id,
+        "especialidade.nome": medic.specialty.name,
+        createdAt: medic.created_at, updatedAt: medic.updated_at
+      }
+    }
+    render json: @medics
+  end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_medic
-      @medic = Medic.find(params[:id])
-    end
+    private
+      # Use callbacks to share common setup or constraints between actions.
+      def set_medic
+        @medic = Medic.find(params[:id])
+      end
 
-    # Only allow a list of trusted parameters through.
-    def medic_params
-
-      params.permit(:user_id, "especialidade.id", :numeroRegistro)
-    end
-end
+      # Only allow a list of trusted parameters through.
+      def medic_params
+        params.permit(:user_id, "especialidade.id", :numeroRegistro)
+      end
+  end

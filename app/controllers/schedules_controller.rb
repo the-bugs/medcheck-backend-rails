@@ -13,6 +13,18 @@ class SchedulesController < ApplicationController
     render json: {id:@schedule.id, idMedico: @schedule.medic_id,dataAgenda: @schedule.date, updatedAt: @schedule.updated_at}
   end
 
+  # GET /agendas/medicos/id
+  def schedules_by_medics
+    @schedules = Schedule.where(medic_id: params[:id]).map { 
+      |schedule| {
+        id: schedule.id, 
+        dataAgenda: schedule.date,      
+        createdAt: schedule.created_at, updatedAt: schedule.updated_at
+      }
+    }
+    render json: @schedules
+  end
+
   # POST /schedules
   def create
     @schedule = Schedule.new(date:params[:dataAgenda], medic_id:params[:idMedico])
