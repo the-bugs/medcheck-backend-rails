@@ -3,22 +3,22 @@ class MedicsController < ApplicationController
 
   # GET /medics
   def index
-    @medics = Medic.all
+    @medics = Medic.all.map {|medic| {id: medic.id, numeroRegistro: medic.registry,"usuario.nome": medic.user.name, "especialidade.id": medic.specialty_id, "especialidade.nome": medic.specialty.name, createdAt: medic.created_at, updatedAt: medic.updated_at}}
 
-    render json: @medics, include: [:user, :specialty, :schedules]
+    render json: @medics
   end
 
   # GET /medics/1
   def show
-    render json: @medic, include: [:user, :specialty, :schedules]
+    render json: {id: @medic.id, numeroRegistro: @medic.registry,"usuario.nome": @medic.user.name, "especialidade.id": @medic.specialty_id, "especialidade.nome": @medic.specialty.name, createdAt: @medic.created_at, updatedAt: @medic.updated_at}
   end
 
   # POST /medics
   def create
-    @medic = Medic.new(medic_params)
+    @medic = Medic.new(registry:params[:numeroRegistro], user_id:params[:"usuario.id"], specialty_id:params[:"especialidade.id"])
 
     if @medic.save
-      render json: @medic, status: :created, location: @medic
+      render json: {id: @medic.id, numeroRegistro: @medic.registry,"usuario.nome": @medic.user_id, "especialidade.id": @medic.specialty_id, "especialidade.nome": @medic.specialty.name, createdAt: @medic.created_at, updatedAt: @medic.updated_at}, status: :created, location: @medic
     else
       render json: @medic.errors, status: :unprocessable_entity
     end
@@ -26,8 +26,9 @@ class MedicsController < ApplicationController
 
   # PATCH/PUT /medics/1
   def update
-    if @medic.update(medic_params)
-      render json: @medic
+    puts(@specialty) 
+    if @medic.update(registry:params[:numeroRegistro], user_id:params[:"usuario.id"], specialty_id:params[:"especialidade.id"])
+      render json: {id: @medic.id, numeroRegistro: @medic.registry,"usuario.nome": @medic.user_id, "especialidade.id": @medic.specialty_id, "especialidade.nome": @medic.specialty.name, createdAt: @medic.created_at, updatedAt: @medic.updated_at}
     else
       render json: @medic.errors, status: :unprocessable_entity
     end
@@ -46,6 +47,7 @@ class MedicsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def medic_params
-      params.require(:medic).permit(:user_id, :specialty_id, :registry)
+
+      params.permit(:user_id, "especialidade.id", :numeroRegistro)
     end
 end

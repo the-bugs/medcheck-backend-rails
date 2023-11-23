@@ -22,7 +22,7 @@ class SpecialtiesController < ApplicationController
     
     if @specialty.save 
       puts(@specialty) 
-      render json: {nome:@specialty.name}, status: :created, location: @specialty
+      render json: {id:@specialty.id, nome: @specialty.name, createdAt: @specialty.created_at, updatedAt: @specialty.updated_at}, status: :created, location: @specialty
     else
       render json: @specialty.errors, status: :unprocessable_entity
     end

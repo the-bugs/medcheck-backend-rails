@@ -27,8 +27,9 @@ class RecordsController < ApplicationController
 
   # PATCH/PUT /records/1
   def update
-    if @record.update(record_params)
-      render json: @record
+    if @record.update(description:params[:descricao], patient_id:params[:idPaciente])
+      puts(@schedule)
+      render json: {id:@record.id, pacienteId: @record.patient_id, descricao: @record.description, createdAt: @record.created_at, updatedAt: @record.updated_at}
     else
       render json: @record.errors, status: :unprocessable_entity
     end
