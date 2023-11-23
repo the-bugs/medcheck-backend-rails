@@ -3,22 +3,24 @@ class SchedulesController < ApplicationController
 
   # GET /schedules
   def index
-    @schedules = Schedule.all
+    @schedules = Schedule.all.map { |schedule| {id:schedule.id, idMedico: schedule.medic_id,dataAgenda: schedule.date, updatedAt: schedule.updated_at} }
 
     render json: @schedules
   end
 
   # GET /schedules/1
   def show
-    render json: @schedule
+    render json: {id:@schedule.id, idMedico: @schedule.medic_id,dataAgenda: @schedule.date, updatedAt: @schedule.updated_at}
   end
 
   # POST /schedules
   def create
-    @schedule = Schedule.new(schedule_params)
+    @schedule = Schedule.new(date:params[:dataAgenda], medic_id:params[:idMedico])
 
     if @schedule.save
-      render json: @schedule, status: :created, location: @schedule
+      puts(@schedule) 
+
+      render json: {dataAgenda:@schedule.date}, status: :created, location: @schedule
     else
       render json: @schedule.errors, status: :unprocessable_entity
     end
@@ -26,8 +28,9 @@ class SchedulesController < ApplicationController
 
   # PATCH/PUT /schedules/1
   def update
-    if @schedule.update(schedule_params)
-      render json: @schedule
+    if @schedule.update(date:params[:dataAgenda], medic_id:params[:idMedico])
+      puts(@schedule) 
+      render json: {dataAgenda:@schedule.date}
     else
       render json: @schedule.errors, status: :unprocessable_entity
     end
@@ -46,6 +49,7 @@ class SchedulesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def schedule_params
+      params.permit(:dataAgenda, idMedico)
       params.require(:schedule).permit(:medic_id, :date)
     end
 end
