@@ -1,7 +1,7 @@
 class SpecialtiesController < ApplicationController
-  before_action :authorize_request, only: %i[create update destroy]
+  before_action :authorize_request, only: %i[update destroy]
   before_action :set_specialty, only: %i[ show update destroy ]
-  before_action :permit_request, only: %i[ create ]
+  before_action :permit_request, only: %i[ ]
 
   # GET /specialties
   def index
