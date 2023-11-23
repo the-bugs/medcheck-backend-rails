@@ -4,22 +4,24 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    @users = User.all.map {|user| {user_id: user.id, nome: user.name, email: user.email, tipo: user.user_type,createdAt: user.created_at, updatedAt: user.updated_at}}
 
-    render json: @users, include: [:patient, :medic]
+    render json: @users
   end
 
   # GET /users/1
   def show
-    render json: @user, include: [:patient => {:include => :record}]
+    render json: {user_id: @user.id, nome: @user.name, email: @user.email, tipo: @user.user_type,createdAt: @user.created_at, updatedAt: @user.updated_at}
   end
 
   # POST /users
   def create
-    @user = User.new(user_params)
+
+    puts(@record) 
+    @user = User.new(name:params[:nome], email:params[:email], user_type:params[:tipo], password:params[:password])
 
     if @user.save
-      render json: @user, status: :created
+      render json: {user_id: @user.id, nome: @user.name, email: @user.email, tipo: @user.user_type,createdAt: @user.created_at, updatedAt: @user.updated_at}, status: :created
     else
       render json: { errors: @user.errors.full_messages },
              status: :unprocessable_entity
@@ -28,8 +30,8 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
-      render json: @user
+    if @user.update(name:params[:nome], email:params[:email], user_type:params[:tipo])
+      render json: {user_id: @user.id, nome: @user.name, email: @user.email, tipo: @user.user_type,createdAt: @user.created_at, updatedAt: @user.updated_at}
     else
       render json: { errors: @user.errors.full_messages },
              status: :unprocessable_entity
@@ -52,7 +54,7 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.permit(
-       :name, :email, :password, :user_type
+       :nome, :email, :password, :tipo
       )
     end
 end

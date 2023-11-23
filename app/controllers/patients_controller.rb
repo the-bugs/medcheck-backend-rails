@@ -3,22 +3,23 @@ class PatientsController < ApplicationController
 
   # GET /patients
   def index
-    @patients = Patient.all
+    @patients = Patient.all.map { |patient| {id:patient.id, usuarioId: patient.user_id, cpf: patient.cpf, sexo: patient.sex, dataNascimento: patient.dob,createdAt: patient.created_at, updatedAt: patient.updated_at} }
 
     render json: @patients
   end
 
   # GET /patients/1
   def show
-    render json: @patient
+    render json: {id:@patient.id, usuarioId: @patient.user_id, cpf: @patient.cpf, sexo: @patient.sex, dataNascimento: @patient.dob,createdAt: @patient.created_at, updatedAt: @patient.updated_at}
   end
 
   # POST /patients
   def create
-    @patient = Patient.new(patient_params)
+    puts(@patient)
+    @patient = Patient.new(user_id:params[:usuarioId], cpf:params[:cpf], sex:params[:sexo], dob:params[:dataNascimento])
 
     if @patient.save
-      render json: @patient, status: :created, location: @patient
+      render json: {id:@patient.id, usuarioId: @patient.user_id, cpf: @patient.cpf, sexo: @patient.sex, dataNascimento: @patient.dob,createdAt: @patient.created_at, updatedAt: @patient.updated_at}, status: :created, location: @patient
     else
       render json: @patient.errors, status: :unprocessable_entity
     end
@@ -26,8 +27,8 @@ class PatientsController < ApplicationController
 
   # PATCH/PUT /patients/1
   def update
-    if @patient.update(patient_params)
-      render json: @patient
+    if @patient.update(user_id:params[:usuarioId], cpf:params[:cpf], sex:params[:sexo], dob:params[:dataNascimento])
+      render json: {id:@patient.id, usuarioId: @patient.user_id, cpf: @patient.cpf, sexo: @patient.sex, dataNascimento: @patient.dob,createdAt: @patient.created_at, updatedAt: @patient.updated_at}
     else
       render json: @patient.errors, status: :unprocessable_entity
     end

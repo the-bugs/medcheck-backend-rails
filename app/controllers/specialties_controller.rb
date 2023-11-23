@@ -5,22 +5,24 @@ class SpecialtiesController < ApplicationController
 
   # GET /specialties
   def index
-    @specialties = Specialty.all
+    @specialties = Specialty.all.map { |specialty| {id:specialty.id,nome: specialty.name, createdAt: specialty.created_at, updatedAt: specialty.updated_at} }
 
     render json: @specialties
   end
 
   # GET /specialties/1
   def show
-    render json: @specialty
+    render json: {id:@specialty.id, nome: @specialty.name, createdAt: @specialty.created_at, updatedAt: @specialty.updated_at}
   end
 
   # POST /specialties
   def create
-    @specialty = Specialty.new(specialty_params)
+    @specialty = Specialty.new(name:params[:nome])
 
-    if @specialty.save
-      render json: @specialty, status: :created, location: @specialty
+    
+    if @specialty.save 
+      puts(@specialty) 
+      render json: {id:@specialty.id, nome: @specialty.name, createdAt: @specialty.created_at, updatedAt: @specialty.updated_at}, status: :created, location: @specialty
     else
       render json: @specialty.errors, status: :unprocessable_entity
     end
@@ -28,8 +30,9 @@ class SpecialtiesController < ApplicationController
 
   # PATCH/PUT /specialties/1
   def update
-    if @specialty.update(specialty_params)
-      render json: @specialty
+    if @specialty.update(name:params[:nome])
+      puts(@specialty)
+      render json: {nome:@specialty.name}
     else
       render json: @specialty.errors, status: :unprocessable_entity
     end
@@ -48,6 +51,6 @@ class SpecialtiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def specialty_params
-      params.permit(:name)
+      params.permit(:nome)
     end
 end

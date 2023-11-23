@@ -3,22 +3,23 @@ class RecordsController < ApplicationController
 
   # GET /records
   def index
-    @records = Record.all
+    @records = Record.all.map { |record| {id:record.id, pacienteId: record.patient.id, descricao: record.description, createdAt: record.created_at, updatedAt: record.updated_at} }
 
     render json: @records
   end
 
   # GET /records/1
   def show
-    render json: @record
+    render json: {id:@record.id, pacienteId: @record.patient_id, descricao: @record.description, createdAt: @record.created_at, updatedAt: @record.updated_at}
   end
 
   # POST /records
   def create
-    @record = Record.new(record_params)
+    puts(@record) 
+    @record = Record.new(description:params[:descricao], patient_id:params[:idPaciente])
 
     if @record.save
-      render json: @record, status: :created, location: @record
+      render json: {id:@record.id, pacienteId: @record.patient_id, descricao: @record.description, createdAt: @record.created_at, updatedAt: @record.updated_at}, status: :created, location: @record
     else
       render json: @record.errors, status: :unprocessable_entity
     end
@@ -26,8 +27,9 @@ class RecordsController < ApplicationController
 
   # PATCH/PUT /records/1
   def update
-    if @record.update(record_params)
-      render json: @record
+    if @record.update(description:params[:descricao], patient_id:params[:idPaciente])
+      puts(@schedule)
+      render json: {id:@record.id, pacienteId: @record.patient_id, descricao: @record.description, createdAt: @record.created_at, updatedAt: @record.updated_at}
     else
       render json: @record.errors, status: :unprocessable_entity
     end
@@ -46,6 +48,7 @@ class RecordsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def record_params
+      params.permit(:descricao,:idPaciente)
       params.require(:record).permit(:patient_id, :description)
     end
 end
