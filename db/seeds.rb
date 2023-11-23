@@ -18,6 +18,12 @@ end
 
 @users = User.create!([
 	{
+		name: "admin",
+		email: "admin@example.com",
+		password: "admin",
+		is_admin: true
+	},
+	{
 		name: "Rodrigo",
 		email: "rodrigocsm@ufba.br",
 		password: "a2s13d3a5s4d",
